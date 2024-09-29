@@ -9,6 +9,6 @@ URL="https://github.com/smokingplaya/bashhistory/releases/latest/download/bashhi
 OUTPUT="bashhistory"
 
 curl -o $OUTPUT $URL
-chmod +x $OUTPUT
+sudo chmod +x $OUTPUT
 sudo mv $OUTPUT /usr/local/bin
 echo "The file was successfully moved to /usr/local/bin"
