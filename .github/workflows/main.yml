@@ -1,0 +1,46 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*' 
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Set executable name
+        id: set_name
+        run: |
+          echo "EXE_NAME=bash_history_analyzer" >> $GITHUB_ENV
+          echo "OUTPUT_NAME=bashhistory-linux_x86" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Rename executable for Linux
+        run: |
+          mv target/release/${{ env.EXE_NAME }} target/release/${{ env.OUTPUT_NAME }}
+        shell: bash
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            target/release/${{ env.OUTPUT_NAME }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
