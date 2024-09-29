@@ -1,0 +1,11 @@
+[package]
+name = "bash_history_analyzer"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.89"
+colored = "2.1.0"
+hashbrown = "0.14.5"
+tiny-gradient = "0.1.0"
+users = "0.11.0"
