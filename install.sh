@@ -8,7 +8,7 @@ fi
 URL="https://github.com/smokingplaya/bashhistory/releases/latest/download/bashhistory-linux_x86"
 OUTPUT="bashhistory"
 
-curl -o $OUTPUT $URL
+sudo curl -o $OUTPUT $URL
 sudo chmod +x $OUTPUT
-sudo mv $OUTPUT /usr/local/bin
+sudo mv -f $OUTPUT /usr/local/bin
 echo "The file was successfully moved to /usr/local/bin"
